@@ -80,6 +80,31 @@ Your server should start on `http://localhost:3000/`. Open this URL in your brow
 - **Method**: `GET`
 - **Parameters**: `id` - ID of the transaction.
 
+#### Search by transaction name:
+
+- **Endpoint**: `/products`
+- **Method**: `GET`
+- **Query Parameters**:
+  - `name`: Name or part of the name of the transaction you're looking for.
+  - Example: `/products?name=lunch`
+
+#### Filter transactions by type:
+
+- **Endpoint**: `/products`
+- **Method**: `GET`
+- **Query Parameters**:
+  - `type`: The type of transactions you're interested in. It can be either "Kas Masuk" or "Kas Keluar".
+  - Example: `/products?type=Kas Masuk`
+
+#### Search and Filter Combined:
+
+- **Endpoint**: `/products`
+- **Method**: `GET`
+- **Query Parameters**:
+  - `name`: Name or part of the name of the transaction you're looking for.
+  - `type`: The type of transactions you're interested in.
+  - Example: `/products?name=lunch&type=Kas Keluar`
+
 #### Add a new transaction:
 
 - **Endpoint**: `/products`
