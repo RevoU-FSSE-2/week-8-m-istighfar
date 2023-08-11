@@ -16,9 +16,9 @@ interface Product {
 }
 
 let products: Product[] = [
-//   { id: 1, name: 'Product A', price: 10 },
-//   { id: 2, name: 'Product B', price: 20 },
 ];
+
+let lastId = 0;
 
 
 app.use(cors());
@@ -31,7 +31,7 @@ const users = {
 
 app.use(basicAuth({
   users: users,
-  challenge: true,  // Will display a dialog box in browsers
+  challenge: true, 
   unauthorizedResponse: 'Access Denied'
 }));
 
@@ -40,12 +40,11 @@ app.get('/', (req: Request, res: Response) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-// Return all products with optional filtering by name and category
-// Return all products with optional filtering by name and category
+// Get all products with optional filtering by name and category
 app.get('/products', (req: Request, res: Response) => {
   let filteredProducts = products;
 
-  // Filter by name if "name" query parameter is provided
+// Filter by name if "name" query parameter is provided
   const searchName = req.query.name as string;
   if (searchName) {
       filteredProducts = filteredProducts.filter(product => 
@@ -53,7 +52,7 @@ app.get('/products', (req: Request, res: Response) => {
       );
   }
 
-  // Filter by category if "category" query parameter is provided
+// Filter by category if "category" query parameter is provided
   const categoryFilter = req.query.type as string;
   if (categoryFilter) {
       filteredProducts = filteredProducts.filter(product => 
@@ -73,7 +72,7 @@ app.get('/products', (req: Request, res: Response) => {
   // Calculate the balance
   const balance = totalCashIn - totalCashOut;
 
-  res.json({
+  res.json({message: 'Semua produk telah didapatkan',
       products: filteredProducts,
       totalCashIn: totalCashIn,
       totalCashOut: totalCashOut,
@@ -81,26 +80,31 @@ app.get('/products', (req: Request, res: Response) => {
   });
 });
 
+//Get product by ID
 app.get('/products/:id', (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const product = products.find((p) => p.id === id);
   if (product) {
-    res.json(product);
+    res.json({message: 'Produk telah didapatkan', product});
   } else {
     res.status(404).json({ message: 'Produk tidak ditemukan' });
   }
 });
 
+//Post
 app.post('/products', (req: Request, res: Response) => {
+  lastId++
   const newProduct: Product = {
-    id: products.length + 1,
+    id: lastId,
     name: req.body.name,
     amount: req.body.amount,
     type: req.body.type
   };
   products.push(newProduct);
-  res.status(201).json(newProduct);
+  res.status(201).json({message: 'Produk telah ditambahkan', newProduct});
 });
+
+
 
 app.put('/products/:id', (req: Request, res: Response) => {
  const id = parseInt(req.params.id);
@@ -113,7 +117,7 @@ app.put('/products/:id', (req: Request, res: Response) => {
       type: req.body.type
     };
     products[productIndex] = updatedProduct;
-    res.json(updatedProduct);
+    res.json({message: 'Produk telah diupdate', updatedProduct});
   } else {
     res.status(404).json({ message: 'Produk tidak ditemukan' });
   }
@@ -129,14 +133,14 @@ app.patch('/products/:id', (req: Request, res: Response) => {
       ...req.body
     };
     products[productIndex] = updatedProduct;
-    res.json(updatedProduct);
+    res.json({message: 'Produk telah diupdate', updatedProduct});
   } else {
     res.status(404).json({ message: 'Produk tidak ditemukan' });
   }
 }); 
 
 app.delete('/products', (req: Request, res: Response) => {
-  products = [];  // Clear the array
+  products = [];  
   res.json({ message: 'Semua produk telah dihapus' });
 });
 
@@ -146,7 +150,7 @@ app.delete('/products/:id', (req: Request, res: Response) => {
   const productIndex = products.findIndex((p) => p.id === id);
   if (productIndex !== -1) {
     const deletedProduct = products.splice(productIndex, 1)[0];
-    res.json(deletedProduct);
+    res.json({message: 'Produk tidak dihapus', deletedProduct});
   } else {
     res.status(404).json({ message: 'Produk tidak ditemukan' });
   }

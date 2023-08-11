@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const assetTableBody = document.getElementById("assetTableBody");
   const searchInput = document.getElementById("searchInput");
 
-  // Load all products on page load
   fetchProducts();
 
   assetForm.addEventListener("submit", (e) => {
@@ -80,7 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", clearData);
 
   function clearData() {
-    const isConfirmed = confirm("Are you sure you want to clear all data?");
+    const isConfirmed = confirm(
+      "Apakah kamu yakin ingin menghapus semua data?"
+    );
 
     if (isConfirmed) {
       fetch(`/products`, {
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("totalCashIn").innerText = "Rp 0";
             document.getElementById("totalCashOut").innerText = "Rp 0";
             document.getElementById("balanceCash").innerText = "Rp 0";
-            alert("All products have been deleted.");
+            alert("Semua data telah dihapus");
           } else {
             console.error("Failed to clear data from server.");
           }
@@ -126,9 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function deleteProduct(id) {
-    const isConfirmed = confirm(
-      "Are you sure you want to delete this product?"
-    );
+    const isConfirmed = confirm("Apakah kamu yakin ingin menghapus data ini?");
     if (isConfirmed) {
       fetch(`/products/${id}`, {
         method: "DELETE",
