@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const assetId = document.getElementById("assetId").value;
     if (assetId) {
-      console.log(assetId);
       updateProduct(assetId, data);
     } else {
       addNewProduct(data);

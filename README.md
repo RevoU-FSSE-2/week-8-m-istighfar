@@ -10,6 +10,8 @@ The Financial Tracker API is designed to help users track their financial transa
 
 [Live Website](https://shy-pear-dog-sock.cyclic.app)
 
+![flowchart](./flow.png)
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -70,44 +72,44 @@ Your server should start on `http://localhost:3000/`. Open this URL in your brow
 
 #### Get all transactions:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/products`
 - **Method**: `GET`
 - **Response**: A list of all transactions.
 
 #### Get a specific transaction by ID:
 
-- **Endpoint**: `/productss/:id`
+- **Endpoint**: `/api/products/:id`
 - **Method**: `GET`
 - **Parameters**: `id` - ID of the transaction.
 
 #### Search by transaction name:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/products`
 - **Method**: `GET`
 - **Query Parameters**:
   - `name`: Name or part of the name of the transaction you're looking for.
-  - Example: `/products?name=lunch`
+  - Example: `/api/products?name=lunch`
 
 #### Filter transactions by type:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/products`
 - **Method**: `GET`
 - **Query Parameters**:
   - `type`: The type of transactions you're interested in. It can be either "Kas Masuk" or "Kas Keluar".
-  - Example: `/products?type=Kas Masuk`
+  - Example: `/api/products?type=Kas Masuk`
 
 #### Search and Filter Combined:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/products`
 - **Method**: `GET`
 - **Query Parameters**:
   - `name`: Name or part of the name of the transaction you're looking for.
   - `type`: The type of transactions you're interested in.
-  - Example: `/products?name=lunch&type=Kas Keluar`
+  - Example: `/api/products?name=lunch&type=Kas Keluar`
 
 #### Add a new transaction:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/roducts`
 - **Method**: `POST`
 - **Body**:
   - `type`: Either "Kas Masuk" or "Kas Keluar".
@@ -116,13 +118,13 @@ Your server should start on `http://localhost:3000/`. Open this URL in your brow
 
 #### Update a transaction:
 
-- **Endpoint**: `/products/:id`
+- **Endpoint**: `/api/products/:id`
 - **Method**: `PUT`
 - **Parameters**: `id` - ID of the transaction.
 
 #### Partially update a transaction:
 
-- **Endpoint**: `/products/:id`
+- **Endpoint**: `/api/products/:id`
 - **Method**: `PATCH`
 - **Parameters**: `id` - ID of the transaction.
 - **Body** (example): You can include one or more of the following fields to update:
@@ -133,13 +135,13 @@ Your server should start on `http://localhost:3000/`. Open this URL in your brow
 
 #### Delete a transaction:
 
-- **Endpoint**: `/products/:id`
+- **Endpoint**: `/api/products/:id`
 - **Method**: `DELETE`
 - **Parameters**: `id` - ID of the transaction.
 
 #### Delete all transactions:
 
-- **Endpoint**: `/products`
+- **Endpoint**: `/api/products`
 - **Method**: `DELETE`
 - **Description**: This endpoint deletes all transactions from the database. Use with caution as this operation is irreversible.
 
