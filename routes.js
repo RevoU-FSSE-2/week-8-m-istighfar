@@ -18,14 +18,14 @@ router.get('/products', (req, res) => {
     // Filter by category if "category" query parameter is provided
     const categoryFilter = req.query.type;
     if (categoryFilter) {
-        filteredProducts = filteredProducts.filter(product => product.type === categoryFilter);
+        filteredProducts = filteredProducts.filter(product => product.type.toLowerCase() === categoryFilter.toLowerCase());
     }
     // Calculate total price for each category
     const totalCashIn = products
-        .filter(product => product.type === "Kas Masuk")
+        .filter(product => product.type.toLowerCase() === "kas keluar")
         .reduce((sum, product) => sum + product.amount, 0);
     const totalCashOut = products
-        .filter(product => product.type === "Kas Keluar")
+        .filter(product => product.type.toLowerCase() === "kas keluar")
         .reduce((sum, product) => sum + product.amount, 0);
     // Calculate the balance
     const balance = totalCashIn - totalCashOut;
