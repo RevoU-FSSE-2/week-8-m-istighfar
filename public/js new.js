@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const assetId = document.getElementById("assetId").value;
     if (assetId) {
+      console.log(assetId);
       updateProduct(assetId, data);
     } else {
       addNewProduct(data);
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function fetchProducts(searchQuery = "", categoryFilter = "") {
-    fetch(`/products?name=${searchQuery}&type=${categoryFilter}`)
+    fetch(`/api/products?name=${searchQuery}&type=${categoryFilter}`)
       .then((response) => response.json())
       .then((data) => {
         let tableRows = "";
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (isConfirmed) {
-      fetch(`/products`, {
+      fetch(`/api/products`, {
         method: "DELETE",
       })
         .then((response) => response.json())
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function editProduct(id) {
-    fetch(`/products/${id}`)
+    fetch(`/api/products/${id}`)
       .then((response) => response.json())
       .then((product) => {
         document.getElementById("assetId").value = product.id;
@@ -129,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function deleteProduct(id) {
     const isConfirmed = confirm("Apakah kamu yakin ingin menghapus data ini?");
     if (isConfirmed) {
-      fetch(`/products/${id}`, {
+      fetch(`/api/products/${id}`, {
         method: "DELETE",
       })
         .then(() => {
@@ -140,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateProduct(assetId, data) {
-    fetch(`/products/${assetId}`, {
+    fetch(`/api/products/${assetId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function addNewProduct(data) {
-    fetch("/products", {
+    fetch("/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
